@@ -1,0 +1,464 @@
+{
+  "luis_schema_version": "2.0.0",
+  "versionId": "0.1",
+  "name": "MoviesBot",
+  "desc": "",
+  "culture": "en-us",
+  "intents": [
+    {
+      "name": "Help"
+    },
+    {
+      "name": "MoviesList"
+    },
+    {
+      "name": "None"
+    },
+    {
+      "name": "ReleaseDate"
+    },
+    {
+      "name": "Reviews"
+    }
+  ],
+  "entities": [
+    {
+      "name": "Genre"
+    },
+    {
+      "name": "Language"
+    },
+    {
+      "name": "MovieName"
+    }
+  ],
+  "composites": [],
+  "closedLists": [],
+  "bing_entities": [
+    "datetimeV2",
+    "geography"
+  ],
+  "actions": [],
+  "model_features": [
+    {
+      "name": "date",
+      "mode": true,
+      "words": "today,tomorrow,yesterday,upcoming,this week,this month,this weekend",
+      "activated": true
+    },
+    {
+      "name": "genre",
+      "mode": true,
+      "words": "thriller,comedy,action,adventure,romance,horror,fantasy,crime,family,science fiction",
+      "activated": true
+    },
+    {
+      "name": "reviews",
+      "mode": true,
+      "words": "review",
+      "activated": true
+    }
+  ],
+  "regex_features": [
+    {
+      "name": "datetime",
+      "pattern": "[0-9]+{'st'|'nd'|'rd'|'th'}[0-9][0-9][0-9][0-9]",
+      "activated": true
+    }
+  ],
+  "utterances": [
+    {
+      "text": "when is dangal releasing?",
+      "intent": "ReleaseDate",
+      "entities": [
+        {
+          "entity": "MovieName",
+          "startPos": 8,
+          "endPos": 13
+        }
+      ]
+    },
+    {
+      "text": "release date of dangal?",
+      "intent": "ReleaseDate",
+      "entities": [
+        {
+          "entity": "MovieName",
+          "startPos": 16,
+          "endPos": 21
+        }
+      ]
+    },
+    {
+      "text": "baahuballi release date",
+      "intent": "ReleaseDate",
+      "entities": [
+        {
+          "entity": "MovieName",
+          "startPos": 0,
+          "endPos": 9
+        }
+      ]
+    },
+    {
+      "text": "when is dhoom releasing",
+      "intent": "ReleaseDate",
+      "entities": [
+        {
+          "entity": "MovieName",
+          "startPos": 8,
+          "endPos": 12
+        }
+      ]
+    },
+    {
+      "text": "dhoom release date",
+      "intent": "ReleaseDate",
+      "entities": [
+        {
+          "entity": "MovieName",
+          "startPos": 0,
+          "endPos": 4
+        }
+      ]
+    },
+    {
+      "text": "give the reviews for dhoom",
+      "intent": "ReleaseDate",
+      "entities": [
+        {
+          "entity": "MovieName",
+          "startPos": 21,
+          "endPos": 25
+        }
+      ]
+    },
+    {
+      "text": "dangal movie release date",
+      "intent": "ReleaseDate",
+      "entities": [
+        {
+          "entity": "MovieName",
+          "startPos": 0,
+          "endPos": 5
+        }
+      ]
+    },
+    {
+      "text": "when is happy releasing",
+      "intent": "ReleaseDate",
+      "entities": [
+        {
+          "entity": "MovieName",
+          "startPos": 8,
+          "endPos": 12
+        }
+      ]
+    },
+    {
+      "text": "reviews of dangal",
+      "intent": "Reviews",
+      "entities": [
+        {
+          "entity": "MovieName",
+          "startPos": 11,
+          "endPos": 16
+        }
+      ]
+    },
+    {
+      "text": "help me",
+      "intent": "Help",
+      "entities": []
+    },
+    {
+      "text": "i need help",
+      "intent": "Help",
+      "entities": []
+    },
+    {
+      "text": "what can i do ?",
+      "intent": "Help",
+      "entities": []
+    },
+    {
+      "text": "what are the available options",
+      "intent": "Help",
+      "entities": []
+    },
+    {
+      "text": "review of holi",
+      "intent": "Help",
+      "entities": [
+        {
+          "entity": "MovieName",
+          "startPos": 10,
+          "endPos": 13
+        }
+      ]
+    },
+    {
+      "text": "all movies releasing on 23 rd march 2018",
+      "intent": "MoviesList",
+      "entities": []
+    },
+    {
+      "text": "list of movies releasing on 23 rd march 2018",
+      "intent": "MoviesList",
+      "entities": []
+    },
+    {
+      "text": "movies releasing on 25 th march 2016",
+      "intent": "MoviesList",
+      "entities": []
+    },
+    {
+      "text": "want to watch romantic telugu upcoming movies",
+      "intent": "MoviesList",
+      "entities": [
+        {
+          "entity": "Genre",
+          "startPos": 14,
+          "endPos": 21
+        },
+        {
+          "entity": "Language",
+          "startPos": 23,
+          "endPos": 28
+        }
+      ]
+    },
+    {
+      "text": "which thriller movies has got highest rating this week",
+      "intent": "MoviesList",
+      "entities": [
+        {
+          "entity": "Genre",
+          "startPos": 6,
+          "endPos": 13
+        }
+      ]
+    },
+    {
+      "text": "any thriller movies releasing today",
+      "intent": "MoviesList",
+      "entities": [
+        {
+          "entity": "Genre",
+          "startPos": 4,
+          "endPos": 11
+        }
+      ]
+    },
+    {
+      "text": "want to watch romantic upcoming movies in hyderabad",
+      "intent": "MoviesList",
+      "entities": [
+        {
+          "entity": "Genre",
+          "startPos": 14,
+          "endPos": 21
+        }
+      ]
+    },
+    {
+      "text": "show movies that are releasing on 23 rd march",
+      "intent": "MoviesList",
+      "entities": []
+    },
+    {
+      "text": "list of all movies releasing on 24 th march",
+      "intent": "MoviesList",
+      "entities": []
+    },
+    {
+      "text": "movies release on 23rd march2017",
+      "intent": "MoviesList",
+      "entities": []
+    },
+    {
+      "text": "list of movies releasing on 23rd march 2019",
+      "intent": "MoviesList",
+      "entities": []
+    },
+    {
+      "text": "which horror movie is releasing this week",
+      "intent": "MoviesList",
+      "entities": [
+        {
+          "entity": "Genre",
+          "startPos": 6,
+          "endPos": 11
+        }
+      ]
+    },
+    {
+      "text": "what are the movies releasing today",
+      "intent": "MoviesList",
+      "entities": []
+    },
+    {
+      "text": "what are romantic movies releasing in india",
+      "intent": "MoviesList",
+      "entities": [
+        {
+          "entity": "Genre",
+          "startPos": 9,
+          "endPos": 16
+        }
+      ]
+    },
+    {
+      "text": "which comedy movie is releasing in hyderabad tomorrow",
+      "intent": "MoviesList",
+      "entities": [
+        {
+          "entity": "Genre",
+          "startPos": 6,
+          "endPos": 11
+        }
+      ]
+    },
+    {
+      "text": "which fantasy movies is releasing in delhi",
+      "intent": "MoviesList",
+      "entities": [
+        {
+          "entity": "Genre",
+          "startPos": 6,
+          "endPos": 12
+        }
+      ]
+    },
+    {
+      "text": "which thriller movie is releasing in seattle this week",
+      "intent": "MoviesList",
+      "entities": [
+        {
+          "entity": "Genre",
+          "startPos": 6,
+          "endPos": 13
+        }
+      ]
+    },
+    {
+      "text": "any hindi romantic movies today",
+      "intent": "MoviesList",
+      "entities": [
+        {
+          "entity": "Genre",
+          "startPos": 10,
+          "endPos": 17
+        },
+        {
+          "entity": "Language",
+          "startPos": 4,
+          "endPos": 8
+        }
+      ]
+    },
+    {
+      "text": "want some telugu thriller movies",
+      "intent": "MoviesList",
+      "entities": [
+        {
+          "entity": "Genre",
+          "startPos": 17,
+          "endPos": 24
+        },
+        {
+          "entity": "Language",
+          "startPos": 10,
+          "endPos": 15
+        }
+      ]
+    },
+    {
+      "text": "what are the hindi movies releasing this week",
+      "intent": "MoviesList",
+      "entities": [
+        {
+          "entity": "Language",
+          "startPos": 13,
+          "endPos": 17
+        }
+      ]
+    },
+    {
+      "text": "want to watch some thriller movie",
+      "intent": "MoviesList",
+      "entities": [
+        {
+          "entity": "Genre",
+          "startPos": 19,
+          "endPos": 26
+        }
+      ]
+    },
+    {
+      "text": "any thriller to watch today",
+      "intent": "MoviesList",
+      "entities": [
+        {
+          "entity": "Genre",
+          "startPos": 4,
+          "endPos": 11
+        }
+      ]
+    },
+    {
+      "text": "which punjabi family movie is releasing today in canada",
+      "intent": "MoviesList",
+      "entities": [
+        {
+          "entity": "Genre",
+          "startPos": 14,
+          "endPos": 19
+        },
+        {
+          "entity": "Language",
+          "startPos": 6,
+          "endPos": 12
+        }
+      ]
+    },
+    {
+      "text": "any english movies to watch in mumbai tomorrow",
+      "intent": "MoviesList",
+      "entities": [
+        {
+          "entity": "Language",
+          "startPos": 4,
+          "endPos": 10
+        }
+      ]
+    },
+    {
+      "text": "any tamil movies to watch in hyderabad",
+      "intent": "MoviesList",
+      "entities": [
+        {
+          "entity": "Language",
+          "startPos": 4,
+          "endPos": 8
+        }
+      ]
+    },
+    {
+      "text": "which malyalam fantasy movies this friday",
+      "intent": "MoviesList",
+      "entities": [
+        {
+          "entity": "Genre",
+          "startPos": 15,
+          "endPos": 21
+        },
+        {
+          "entity": "Language",
+          "startPos": 6,
+          "endPos": 13
+        }
+      ]
+    }
+  ]
+}
