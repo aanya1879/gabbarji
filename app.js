@@ -336,11 +336,6 @@ session.send({
             type: "imBack",
             title: "Get list of movies of your Choice",
             value: "Get list of movies of your Choice"
-          },
-          {
-            type: "imBack",
-            title: "Search for reviews               ",
-            value: "Search for reviews               "
           }
         ]
       }
