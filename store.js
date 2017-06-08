@@ -145,7 +145,7 @@ var m=d.getMonth();
 var y=d.getFullYear();
 //console.log("m:"+m);
 var pm=m;
-=var py=y;
+var py=y;
 var fy=y;
 var fm=m+2;
 if(m==1)
