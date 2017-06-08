@@ -387,7 +387,7 @@ else if(m==12)
                     {
                                             var mlist = [];
                                           
-                                               for (var i = 0; i <body.results.length && i< 20; i++) {
+                                               for (var i = 0; i <body.results.length&& i< 15; i++) {
                                                    var s;
                                                    switch(sort)
                                                    {
