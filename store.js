@@ -139,13 +139,13 @@ module.exports = {
        //  console.log("genre in store"+gen);
          }
       
-       if(lCategory!=null)  
+       
 var d=new Date();
 var m=d.getMonth();
 var y=d.getFullYear();
 //console.log("m:"+m);
 var pm=m;
-var py=y;
+=var py=y;
 var fy=y;
 var fm=m+2;
 if(m==1)
@@ -157,7 +157,8 @@ else if(m==12)
 {
     fy=y+1;
     fm=1;
-}       {  
+}       
+             if(lCategory!=null) {  
            switch(lCategory)
     {
         case 'germany':{
