@@ -140,7 +140,24 @@ module.exports = {
          }
       
        if(lCategory!=null)  
-       {  
+var d=new Date();
+var m=d.getMonth();
+var y=d.getFullYear();
+//console.log("m:"+m);
+var pm=m;
+var py=y;
+var fy=y;
+var fm=m+2;
+if(m==1)
+{
+    py=y-1;
+    pm=12;
+}
+else if(m==12)
+{
+    fy=y+1;
+    fm=1;
+}       {  
            switch(lCategory)
     {
         case 'germany':{
@@ -246,24 +263,7 @@ module.exports = {
           else if(gCategory!=null)
              {//dicover
                  sort=4;
-var d=new Date();
-var m=d.getMonth();
-var y=d.getFullYear();
-//console.log("m:"+m);
-var pm=m;
-var py=y;
-var fy=y;
-var fm=m+2;
-if(m==1)
-{
-    py=y-1;
-    pm=12;
-}
-else if(m==12)
-{
-    fy=y+1;
-    fm=1;
-}
+
 //console.log("past date:"+py+pm);
 //console.log("future date:"+fy+'-'+fm+'-'+'1');
                            if(lCategory!=null&& laCategory!=null)
@@ -358,11 +358,31 @@ else if(m==12)
              {
                  if(laCategory!=null)
                  {
-                     sort=2;
+                     sort=4;
+                     var options = {
+                                               method: 'GET',
+                                               url: 'https://api.themoviedb.org/3/discover/movie',
+                                             qs: 
+                                             {   
+                                                  with_original_language: lan,
+                                                  region: loc,
+                                                  language: 'en-US',
+
+                                                 'release_date.lte': fy+'-'+fm+'-'+'1',
+                                                 'release_date.gte': py+'-'+pm+'-'+'1',
+                                                 page: '1',
+                                                 include_video: 'false',
+                                                 include_adult: 'false',
+                                                  sort_by: 'popularity.desc',
+                                                api_key: api },
+
+                                               json: true,
+                                               body:'{}'
+                                         }; 
                  }
                  else{
                      sort=4;
-                 }
+                 
 
                   var options = {
                                                method: 'GET',
@@ -376,7 +396,8 @@ else if(m==12)
                                                json: true,
                                                body:'{}'
                                          }; 
-             }
+                     
+                 } }
              
         // console.log("sort value:"+sort);
                                         
