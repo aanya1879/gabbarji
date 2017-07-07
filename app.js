@@ -30,7 +30,7 @@ var recognizer = new builder.LuisRecognizer(model);
 
 bot.recognizer(recognizer);
 bot.dialog('Hello', function (session,arg){
-    session.sendTyping();
+    //session.sendTyping();
     session.send("Arrey o Samba !!");
     session.send(" Hum hai Gabbar Singh, the bot. Gabbar Ji for you.");
      session.send({
@@ -54,7 +54,6 @@ bot.dialog('ReleaseDate', [
       else{
        var movieName=builder.EntityRecognizer.findEntity(args.intent.entities,'MovieName');
        if(movieName!==null){
-           
            next({response:movieName.entity});
        }else if(session.dialogData.movieName){
            next({response:session.dialogData.movieName});
@@ -74,8 +73,6 @@ bot.dialog('ReleaseDate', [
        if(!movieName){
            session.endDialog('Request cancelled');
        }else{
-
-           
             Store
             .ReleaseDate(movieName)
             .then(function (movie) {
@@ -100,8 +97,6 @@ bot.dialog('ReleaseDate', [
                 session.endDialog('Couldn\'t find Release Date ! check movie name');
              }
             });
-            
-
        }
    }
 ]).triggerAction({
@@ -121,6 +116,7 @@ if(args.intent.entities==undefined){
      var genreEntity=builder.EntityRecognizer.findEntity(args.intent.entities,'Genre');
      var locationEntity=builder.EntityRecognizer.findEntity(args.intent.entities,'builtin.geography.country');
      var languageEntity=builder.EntityRecognizer.findEntity(args.intent.entities,'Language');
+     var industryEntity=builder.EntityRecognizer.findEntity(args.intent.entities,'industry');
      console.log(JSON.stringify(args.intent.entities[0]));
    //  console.log(JSON.stringify(genreEntity));
     // if(args.entities)console.log("into if");
@@ -161,18 +157,38 @@ if(args.intent.entities==undefined){
            session.dialogData.byLocation=true;
           session.dialogData.location=locationEntity.entity;
      }
-     if(languageEntity!==null){
+     if(languageEntity!==null || industryEntity!==null){
            session.dialogData.byLanguage=true;
+         if(languageEntity!=null)
+         {
           session.dialogData.language=languageEntity.entity;
+         }
+         else
+         {
+            
+                    if(industryEntity.entity=="bollywood" || industryEntity.entity=="Bollywood"){
+                        session.dialogData.language='hindi';
+
+                                        }
+                    else if( industryEntity.entity=="tollywood" ||industryEntity.entity=="Tollywood" ){
+                     session.dialogData.language='telugu';
+                                 }
+                    
+                    else if( industryEntity.entity=="hollywood" ||industryEntity.entity=="Hollywood" ){
+                     session.dialogData.language='english';
+                                 }  
+             
+         }
     }
-    if((languageEntity!==null)&&(locationEntity==null)){
+    if((languageEntity!==null || industryEntity!==null )&&(locationEntity==null)){
           session.dialogData.byLocation=true;
-          if((languageEntity.entity=='hindi'|| languageEntity.entity=='telugu'||languageEntity.entity=='tamil'||languageEntity.entity=='malyalam')) {
+          if((session.dialogData.language=='hindi'|| session.dialogData.language=='telugu'||session.dialogData.language=='tamil'||session.dialogData.language=='malyalam')) {
                 session.dialogData.location='IN';
              }else{
                 session.dialogData.location='US';
             }
     }
+    
       if(session.dialogData.genre ||session.dialogData.date||session.dialogData.location||session.dialogData.language){
           next();
       }else{
@@ -246,24 +262,25 @@ if(args.intent.entities==undefined){
 
 });
 
-bot.dialog('Reviews', [
+bot.dialog('Rating', [
 function (session,args,next){
       // session.dialogData.entities=args.entities;
       // console.log("intents" + JSON.stringify(args.intents));
        if(args==undefined){
- builder.Prompts.text(session,'Humko movie naam dede Thakur ')
-      }else{
-       var movieName=builder.EntityRecognizer.findEntity(args.intent.entities,'MovieName');
-       if(movieName!==null){
-           
-           next({response:movieName.entity});
-       }else if(session.dialogData.movieName){
-           next({response:session.dialogData.movieName});
+         builder.Prompts.text(session,'Humko movie naam dede Thakur ')
        }
-       else {
-           builder.Prompts.text(session,'Humko movie naam dede Thakur ')
+       else{
+         var movieName=builder.EntityRecognizer.findEntity(args.intent.entities,'MovieName');
+         if(movieName!==null){
+              next({response:movieName.entity});
+         }
+         else if(session.dialogData.movieName){
+              next({response:session.dialogData.movieName});
+         }
+         else {
+             builder.Prompts.text(session,'Humko movie naam dede Thakur ')
+         }
        }
-      }
    },
 
 function getReview(session,results,next){
@@ -278,7 +295,7 @@ function getReview(session,results,next){
            session.endDialog('Request cancelled');
        }else{
             Store
-            .Reviews(movieName)
+            .Rating(movieName)
             .then(function (reviews) {
                 if(reviews!=null){
                  session.sendTyping();
@@ -297,7 +314,7 @@ function getReview(session,results,next){
 
                 // End
                 session.send("Humko maaf karde Thakur");
-                session.endDialog('Couldn\'t find Review .\n\n Ask me something else');
+                session.endDialog('Couldn\'t find Rating .\n\n Ask me something else');
                
              }
             });
@@ -306,7 +323,7 @@ function getReview(session,results,next){
    }
 ]).triggerAction({
 
-    matches: 'Reviews'
+    matches: 'Rating'
 
 });
 bot.dialog('Help',[
@@ -336,6 +353,11 @@ session.send({
             type: "imBack",
             title: "Get list of movies of your Choice",
             value: "Get list of movies of your Choice"
+          },
+          {
+            type: "imBack",
+            title: "Search for reviews               ",
+            value: "Search for reviews               "
           }
         ]
       }
@@ -603,8 +625,9 @@ function movieListAsAttachment(list) {
 
 
 function reviewAsAttachment(review) {
-    return new builder.ThumbnailCard()
+    return new builder.HeroCard()
         .title(review.title)
-        .text(review.text)
+        .subtitle('RATING: %s, POPULARITY %s ',review.rating, review.popularity)
+       // .text('POPULARITY %s',review.popularity)
         .images([new builder.CardImage().url(review.image)]);
 }
