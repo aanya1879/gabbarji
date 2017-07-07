@@ -121,6 +121,7 @@ if(args.intent.entities==undefined){
      var genreEntity=builder.EntityRecognizer.findEntity(args.intent.entities,'Genre');
      var locationEntity=builder.EntityRecognizer.findEntity(args.intent.entities,'builtin.geography.country');
      var languageEntity=builder.EntityRecognizer.findEntity(args.intent.entities,'Language');
+     var industryEntity=builder.EntityRecognizer.findEntity(args.intent.entities,'industry');
      console.log(JSON.stringify(args.intent.entities[0]));
    //  console.log(JSON.stringify(genreEntity));
     // if(args.entities)console.log("into if");
@@ -161,11 +162,29 @@ if(args.intent.entities==undefined){
            session.dialogData.byLocation=true;
           session.dialogData.location=locationEntity.entity;
      }
-     if(languageEntity!==null){
+     if(languageEntity!==null || industryEntity!=null){
            session.dialogData.byLanguage=true;
+         if(languageEntity!=null)
+         {
           session.dialogData.language=languageEntity.entity;
+         }
+         else
+         {
+            
+                    if(industryEntity.entity=="bollywood" || industryEntity.entity=="Bollywood"){
+                        session.dialogData.language='hindi';
+                                        }
+                    else if( industryEntity.entity=="tollywood" ||industryEntity.entity=="Tollywood" ){
+                     session.dialogData.language='telugu';
+                                 }
+                    
+                    else if( industryEntity.entity=="hollywood" ||industryEntity.entity=="Hollywood" ){
+                     session.dialogData.language='english';
+                                 }  
+             
+         }
     }
-    if((languageEntity!==null)&&(locationEntity==null)){
+    if((languageEntity!==null || industryEntity!==null )&&(locationEntity==null)){
           session.dialogData.byLocation=true;
           if((languageEntity.entity=='hindi'|| languageEntity.entity=='telugu'||languageEntity.entity=='tamil'||languageEntity.entity=='malyalam')) {
                 session.dialogData.location='IN';
